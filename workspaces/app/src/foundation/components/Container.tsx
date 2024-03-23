@@ -1,7 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import { BreakPoint, Color } from '../styles/variables';
+import { BreakPoint, Color } from "../styles/variables";
 
 const _Container = styled.div`
   min-height: 100vh;
@@ -17,9 +16,9 @@ const _Container = styled.div`
 `;
 
 type Props = {
-  children: React.ReactNode;
+	children: React.ReactNode;
 };
 
 export const Container: React.FC<Props> = ({ children }) => {
-  return <_Container>{children}</_Container>;
+	return <_Container>{children}</_Container>;
 };

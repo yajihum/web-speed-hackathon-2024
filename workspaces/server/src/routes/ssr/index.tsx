@@ -53,7 +53,6 @@ async function createHTML({
 	injectData: Record<string, unknown>;
 	styleTags: string;
 }): Promise<string> {
-	console.log("styleTags", styleTags);
 	const htmlContent = await fs.readFile(INDEX_HTML_PATH, "utf-8");
 
 	const content = htmlContent
