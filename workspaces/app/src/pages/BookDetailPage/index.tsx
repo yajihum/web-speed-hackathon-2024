@@ -44,10 +44,7 @@ const _AvatarWrapper = styled.div`
   }
 `;
 
-const BookDetailPage: React.FC = () => {
-  const { bookId } = useParams<RouteParams<'/books/:bookId'>>();
-
-  const { data: book } = useBook({ params: { bookId: bookId || '' } });
+const EpisodeList = ({ bookId }: { bookId: string | undefined }) => {
   const { data: episodeList } = useEpisodeList({
     query: { bookId: bookId || '' },
   });
@@ -55,6 +52,50 @@ const BookDetailPage: React.FC = () => {
   const [isFavorite, toggleFavorite] = useAtom(
     FavoriteBookAtomFamily(bookId || ''),
   );
+
+  const handleFavClick = useCallback(() => {
+    toggleFavorite();
+  }, [toggleFavorite]);
+
+  const latestEpisode = episodeList?.find((episode) => episode.chapter === 1);
+
+  return (
+    <>
+      <BottomNavigator
+        bookId={bookId || ''}
+        isFavorite={isFavorite}
+        latestEpisodeId={latestEpisode?.id ?? ''}
+        onClickFav={handleFavClick}
+      />
+      <section aria-label='エピソード一覧'>
+        <Flex align='center' as='ul' direction='column' justify='center'>
+          {episodeList.map((episode) => (
+            <Suspense key={episode.id} fallback={null}>
+              <EpisodeListItem
+                key={episode.id}
+                bookId={bookId || ''}
+                episodeId={episode.id}
+              />
+            </Suspense>
+          ))}
+          {episodeList.length === 0 && (
+            <>
+              <Spacer height={Space * 2} />
+              <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
+                この作品はまだエピソードがありません
+              </Text>
+            </>
+          )}
+        </Flex>
+      </section>
+    </>
+  );
+};
+
+const BookDetailPage: React.FC = () => {
+  const { bookId } = useParams<RouteParams<'/books/:bookId'>>();
+
+  const { data: book } = useBook({ params: { bookId: bookId || '' } });
 
   const bookImageUrl = getImageUrl({
     format: 'webp',
@@ -68,12 +109,6 @@ const BookDetailPage: React.FC = () => {
     imageId: book.author.image.id,
     width: 32,
   });
-
-  const handleFavClick = useCallback(() => {
-    toggleFavorite();
-  }, [toggleFavorite]);
-
-  const latestEpisode = episodeList?.find((episode) => episode.chapter === 1);
 
   return (
     <Box height='100%' position='relative' px={Space * 2}>
@@ -132,34 +167,11 @@ const BookDetailPage: React.FC = () => {
         </Flex>
       </_HeadingWrapper>
 
-      <BottomNavigator
-        bookId={bookId || ''}
-        isFavorite={isFavorite}
-        latestEpisodeId={latestEpisode?.id ?? ''}
-        onClickFav={handleFavClick}
-      />
-
       <Separator />
 
-      <section aria-label='エピソード一覧'>
-        <Flex align='center' as='ul' direction='column' justify='center'>
-          {episodeList.map((episode) => (
-            <EpisodeListItem
-              key={episode.id}
-              bookId={bookId || ''}
-              episodeId={episode.id}
-            />
-          ))}
-          {episodeList.length === 0 && (
-            <>
-              <Spacer height={Space * 2} />
-              <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
-                この作品はまだエピソードがありません
-              </Text>
-            </>
-          )}
-        </Flex>
-      </section>
+      <Suspense fallback={null}>
+        <EpisodeList bookId={bookId} />
+      </Suspense>
     </Box>
   );
 };
