@@ -42,9 +42,7 @@ export const EpisodeListItem: React.FC<Props> = ({ bookId, episodeId }) => {
 
   const imageUrl = getImageUrl({
     format: 'webp',
-    height: 96,
     imageId: episode.image.id,
-    width: 96,
   });
 
   return (

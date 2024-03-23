@@ -37,9 +37,7 @@ const AuthorDetailPage: React.FC = () => {
 
   const imageUrl = getImageUrl({
     format: 'webp',
-    height: 128,
     imageId: author.image.id,
-    width: 128,
   });
 
   const bookListA11yId = useId();

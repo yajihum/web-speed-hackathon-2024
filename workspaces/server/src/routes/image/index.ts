@@ -1,5 +1,5 @@
-import { createReadStream } from 'node:fs';
 import type { ReadStream } from 'node:fs';
+import { createReadStream } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -35,7 +35,14 @@ const createStreamBody = (stream: ReadStream) => {
   return body;
 };
 
-const SUPPORTED_IMAGE_EXTENSIONS = ['jxl', 'avif', 'webp', 'png', 'jpeg', 'jpg'] as const;
+const SUPPORTED_IMAGE_EXTENSIONS = [
+  'jxl',
+  'avif',
+  'webp',
+  'png',
+  'jpeg',
+  'jpg',
+] as const;
 
 type SupportedImageExtension = (typeof SUPPORTED_IMAGE_EXTENSIONS)[number];
 
@@ -82,16 +89,26 @@ app.get(
   async (c) => {
     const { globby } = await import('globby');
 
-    const { ext: reqImgExt, name: reqImgId } = path.parse(c.req.valid('param').imageFile);
+    const { ext: reqImgExt, name: reqImgId } = path.parse(
+      c.req.valid('param').imageFile,
+    );
 
     const resImgFormat = c.req.valid('query').format ?? reqImgExt.slice(1);
 
     if (!isSupportedImageFormat(resImgFormat)) {
-      throw new HTTPException(501, { message: `Image format: ${resImgFormat} is not supported.` });
+      throw new HTTPException(501, {
+        message: `Image format: ${resImgFormat} is not supported.`,
+      });
     }
 
-    const origFileGlob = [path.resolve(IMAGES_PATH, `${reqImgId}`), path.resolve(IMAGES_PATH, `${reqImgId}.*`)];
-    const [origFilePath] = await globby(origFileGlob, { absolute: true, onlyFiles: true });
+    const origFileGlob = [
+      path.resolve(IMAGES_PATH, `${reqImgId}`),
+      path.resolve(IMAGES_PATH, `${reqImgId}.*`),
+    ];
+    const [origFilePath] = await globby(origFileGlob, {
+      absolute: true,
+      onlyFiles: true,
+    });
     if (origFilePath == null) {
       throw new HTTPException(404, { message: 'Not found.' });
     }
@@ -100,18 +117,28 @@ app.get(
     if (!isSupportedImageFormat(origImgFormat)) {
       throw new HTTPException(500, { message: 'Failed to load image.' });
     }
-    if (resImgFormat === origImgFormat && c.req.valid('query').width == null && c.req.valid('query').height == null) {
+    if (
+      resImgFormat === origImgFormat &&
+      c.req.valid('query').width == null &&
+      c.req.valid('query').height == null
+    ) {
       // 画像変換せずにそのまま返す
       c.header('Content-Type', IMAGE_MIME_TYPE[resImgFormat]);
       return c.body(createStreamBody(createReadStream(origFilePath)));
     }
 
     const origBinary = await fs.readFile(origFilePath);
-    const image = new Image(await IMAGE_CONVERTER[origImgFormat].decode(origBinary));
+    const image = new Image(
+      await IMAGE_CONVERTER[origImgFormat].decode(origBinary),
+    );
 
     const reqImageSize = c.req.valid('query');
 
-    const scale = Math.max((reqImageSize.width ?? 0) / image.width, (reqImageSize.height ?? 0) / image.height) || 1;
+    const scale =
+      Math.max(
+        (reqImageSize.width ?? 0) / image.width,
+        (reqImageSize.height ?? 0) / image.height,
+      ) || 1;
     const manipulated = image.resize({
       height: Math.ceil(image.height * scale),
       preserveAspectRatio: true,

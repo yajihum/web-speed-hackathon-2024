@@ -40,9 +40,7 @@ export const BookListItem: React.FC<Props> = ({ bookId }) => {
   const { data: book } = useBook({ params: { bookId } });
   const imageUrl = getImageUrl({
     format: 'webp',
-    height: 64,
     imageId: book.image.id,
-    width: 64,
   });
 
   return (

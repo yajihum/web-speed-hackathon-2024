@@ -51,16 +51,12 @@ const RankingCard: React.FC<Props> = ({ bookId }) => {
 
   const imageUrl = getImageUrl({
     format: 'webp',
-    height: 96,
     imageId: book.image.id,
-    width: 96,
   });
 
   const authorImageUrl = getImageUrl({
     format: 'webp',
-    height: 32,
     imageId: book.author.image.id,
-    width: 32,
   });
 
   return (

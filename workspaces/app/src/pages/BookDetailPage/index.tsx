@@ -99,15 +99,11 @@ const BookDetailPage: React.FC = () => {
 
   const bookImageUrl = getImageUrl({
     format: 'webp',
-    height: 256,
     imageId: book.image.id,
-    width: 192,
   });
   const auhtorImageUrl = getImageUrl({
     format: 'webp',
-    height: 32,
     imageId: book.author.image.id,
-    width: 32,
   });
 
   return (

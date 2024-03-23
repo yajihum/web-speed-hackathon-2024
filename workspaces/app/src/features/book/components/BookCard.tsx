@@ -46,15 +46,11 @@ const BookCard: React.FC<Props> = ({ bookId }) => {
 
   const imageUrl = getImageUrl({
     format: 'webp',
-    height: 128,
     imageId: book.image.id,
-    width: 192,
   });
   const authorImageUrl = getImageUrl({
     format: 'webp',
-    height: 32,
     imageId: book.author.image.id,
-    width: 32,
   });
 
   return (
