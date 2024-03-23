@@ -3,7 +3,7 @@ import type { z } from 'zod';
 
 import { author, book, episode, image, ranking } from '../../models';
 
-export const GetRankingListResponseSchema = createSelectSchema(ranking)
+export const GetRankingResponseSchema = createSelectSchema(ranking)
   .pick({
     id: true,
     rank: true,
@@ -41,7 +41,12 @@ export const GetRankingListResponseSchema = createSelectSchema(ranking)
           id: true,
         }),
       }),
-  })
-  .array();
+  });
 
-export type GetRankingListResponse = z.infer<typeof GetRankingListResponseSchema>;
+export type GetRankingResponse = z.infer<typeof GetRankingResponseSchema>;
+
+export const GetRankingListResponseSchema = GetRankingResponseSchema.array();
+
+export type GetRankingListResponse = z.infer<
+  typeof GetRankingListResponseSchema
+>;

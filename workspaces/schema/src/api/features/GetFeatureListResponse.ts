@@ -3,7 +3,7 @@ import type { z } from 'zod';
 
 import { author, book, episode, feature, image } from '../../models';
 
-export const GetFeatureListResponseSchema = createSelectSchema(feature)
+export const GetFeatureResponseSchema = createSelectSchema(feature)
   .pick({
     id: true,
   })
@@ -40,7 +40,12 @@ export const GetFeatureListResponseSchema = createSelectSchema(feature)
           id: true,
         }),
       }),
-  })
-  .array();
+  });
 
-export type GetFeatureListResponse = z.infer<typeof GetFeatureListResponseSchema>;
+export type GetFeaturetResponse = z.infer<typeof GetFeatureResponseSchema>;
+
+export const GetFeatureListResponseSchema = GetFeatureResponseSchema.array();
+
+export type GetFeatureListResponse = z.infer<
+  typeof GetFeatureListResponseSchema
+>;

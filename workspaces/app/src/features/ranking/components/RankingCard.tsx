@@ -1,6 +1,8 @@
 import { Suspense } from 'react';
 import styled from 'styled-components';
 
+import type { GetRankingResponse } from '@wsh-2024/schema/src/api/rankings/GetRankingListResponse';
+
 import { Box } from '../../../foundation/components/Box';
 import { Flex } from '../../../foundation/components/Flex';
 import { Image } from '../../../foundation/components/Image';
@@ -15,7 +17,6 @@ import {
   Typography,
 } from '../../../foundation/styles/variables';
 import { getImageUrl } from '../../../lib/image/getImageUrl';
-import { useBook } from '../../book/hooks/useBook';
 import { NavigateNext } from '../../icons/Svgs';
 
 const _Wrapper = styled.li`
@@ -43,11 +44,11 @@ const _AvatarWrapper = styled.div`
 `;
 
 type Props = {
-  bookId: string;
+  ranking: GetRankingResponse;
 };
 
-const RankingCard: React.FC<Props> = ({ bookId }) => {
-  const { data: book } = useBook({ params: { bookId } });
+const RankingCard: React.FC<Props> = ({ ranking }) => {
+  const { book } = ranking;
 
   const imageUrl = getImageUrl({
     format: 'webp',

@@ -25,7 +25,7 @@ const PickupSection: React.FC = () => {
         justify='flex-start'
       >
         {featureList.map((feature) => (
-          <FeatureCard key={feature.id} bookId={feature.book.id} />
+          <FeatureCard key={feature.id} feature={feature} />
         ))}
       </Flex>
     </Box>
@@ -39,7 +39,7 @@ const RankingSection: React.FC = () => {
     <Box maxWidth='100%' overflowX='hidden' overflowY='hidden'>
       <Flex align='center' as='ul' direction='column' justify='center'>
         {rankingList.map((ranking) => (
-          <RankingCard key={ranking.id} bookId={ranking.book.id} />
+          <RankingCard key={ranking.id} ranking={ranking} />
         ))}
       </Flex>
     </Box>
@@ -54,7 +54,7 @@ const ReleaseSection: React.FC = () => {
     <Box maxWidth='100%' overflowX='scroll' overflowY='hidden'>
       <Flex align='stretch' gap={Space * 2} justify='flex-start'>
         {release.books.map((book) => (
-          <BookCard key={book.id} bookId={book.id} />
+          <BookCard key={book.id} book={book} />
         ))}
       </Flex>
     </Box>

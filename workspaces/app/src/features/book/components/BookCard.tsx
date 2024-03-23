@@ -1,6 +1,8 @@
 import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
+import type { GetReleaseBookResponse } from '@wsh-2024/schema/src/api/releases/GetReleaseResponse';
+
 import { Flex } from '../../../foundation/components/Flex';
 import { Image } from '../../../foundation/components/Image';
 import { Link } from '../../../foundation/components/Link';
@@ -12,7 +14,6 @@ import {
   Typography,
 } from '../../../foundation/styles/variables';
 import { getImageUrl } from '../../../lib/image/getImageUrl';
-import { useBook } from '../hooks/useBook';
 
 const _Wrapper = styled(Link)`
   display: flex;
@@ -38,12 +39,10 @@ const _AvatarWrapper = styled.div`
 `;
 
 type Props = {
-  bookId: string;
+  book: GetReleaseBookResponse;
 };
 
-const BookCard: React.FC<Props> = ({ bookId }) => {
-  const { data: book } = useBook({ params: { bookId } });
-
+const BookCard: React.FC<Props> = ({ book }) => {
   const imageUrl = getImageUrl({
     format: 'webp',
     imageId: book.image.id,
@@ -54,7 +53,7 @@ const BookCard: React.FC<Props> = ({ bookId }) => {
   });
 
   return (
-    <_Wrapper href={`/books/${bookId}`}>
+    <_Wrapper href={`/books/${book.id}`}>
       {imageUrl != null && (
         <_ImgWrapper>
           <Image

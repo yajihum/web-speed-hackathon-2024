@@ -3,45 +3,50 @@ import type { z } from 'zod';
 
 import { author, book, episode, image, release } from '../../models';
 
-export const GetReleaseResponseSchema = createSelectSchema(release)
+export const GetReleaseBookResponseSchema = createSelectSchema(book)
   .pick({
-    dayOfWeek: true,
+    description: true,
     id: true,
+    name: true,
   })
   .extend({
-    books: createSelectSchema(book)
+    author: createSelectSchema(author)
       .pick({
         description: true,
         id: true,
         name: true,
       })
       .extend({
-        author: createSelectSchema(author)
-          .pick({
-            description: true,
-            id: true,
-            name: true,
-          })
-          .extend({
-            image: createSelectSchema(image).pick({
-              alt: true,
-              id: true,
-            }),
-          }),
-        episodes: createSelectSchema(episode)
-          .pick({
-            chapter: true,
-            description: true,
-            id: true,
-            name: true,
-          })
-          .array(),
         image: createSelectSchema(image).pick({
           alt: true,
           id: true,
         }),
+      }),
+    episodes: createSelectSchema(episode)
+      .pick({
+        chapter: true,
+        description: true,
+        id: true,
+        name: true,
       })
       .array(),
+    image: createSelectSchema(image).pick({
+      alt: true,
+      id: true,
+    }),
+  });
+
+export type GetReleaseBookResponse = z.infer<
+  typeof GetReleaseBookResponseSchema
+>;
+
+export const GetReleaseResponseSchema = createSelectSchema(release)
+  .pick({
+    dayOfWeek: true,
+    id: true,
+  })
+  .extend({
+    books: GetReleaseBookResponseSchema.array(),
   });
 
 export type GetReleaseResponse = z.infer<typeof GetReleaseResponseSchema>;
