@@ -7,7 +7,6 @@
     "@react-spring/web": "9.7.3",
     "@wsh-2024/image-encrypt": "workspace:*",
     "@wsh-2024/schema": "workspace:*",
-    "axios": "1.6.5",
     "csstype": "3.1.3",
     "jotai": "2.7.0",
     "jquery": "3.7.1",
