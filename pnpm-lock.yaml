@@ -83,9 +83,6 @@ importers:
       underscore:
         specifier: 1.13.6
         version: 1.13.6
-      unicode-collation-algorithm2:
-        specifier: 0.5.0
-        version: 0.5.0
       yup:
         specifier: 1.4.0
         version: 1.4.0
@@ -144,9 +141,6 @@ importers:
       swr:
         specifier: 2.2.4
         version: 2.2.4(react@18.2.0)
-      unicode-collation-algorithm2:
-        specifier: 0.5.0
-        version: 0.5.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -7432,10 +7426,6 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pako@0.2.9:
-    resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
-    dev: false
-
   /pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
 
@@ -8808,10 +8798,6 @@ packages:
     resolution: {integrity: sha512-Eet/eeMhkO6TX8mnUteS9zgPbUMQa4I6Kkp5ORiBD5476/m+PIRiumP5tmh5ioJpH7k51Kehawy2UDfsnxxY8Q==}
     dev: false
 
-  /tiny-inflate@1.0.3:
-    resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
-    dev: false
-
   /tiny-invariant@1.3.1:
     resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==}
     dev: false
@@ -9094,20 +9080,6 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
-
-  /unicode-collation-algorithm2@0.5.0:
-    resolution: {integrity: sha512-n+uoI6fKPtV9VS/WX2sySZeT+ct79L466qKJY9ItTq7mHoWIn0MwkkieZu2Nf5WVkK4YyaULJuVJVKud85K5vg==}
-    dependencies:
-      unicode-trie: 2.0.0
-      unorm: 1.6.0
-    dev: false
-
-  /unicode-trie@2.0.0:
-    resolution: {integrity: sha512-x7bc76x0bm4prf1VLg79uhAzKw8DVboClSN5VxJuQ+LKDOVEW9CdH+VY7SP+vX7xCYQqzzgQpFqz15zeLvAtZQ==}
-    dependencies:
-      pako: 0.2.9
-      tiny-inflate: 1.0.3
-    dev: false
 
   /unicorn-magic@0.1.0:
     resolution: {integrity: sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==}
