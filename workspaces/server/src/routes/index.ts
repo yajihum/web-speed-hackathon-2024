@@ -17,7 +17,12 @@ const app = new Hono();
 app.use(secureHeaders());
 app.use(
   cors({
-    allowHeaders: ['Content-Type', 'Accept-Encoding', 'X-Accept-Encoding', 'Authorization'],
+    allowHeaders: [
+      'Content-Type',
+      'Accept-Encoding',
+      'X-Accept-Encoding',
+      'Authorization',
+    ],
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     credentials: true,
     exposeHeaders: ['Content-Encoding', 'X-Content-Encoding'],
@@ -37,8 +42,6 @@ app.route('/', adminApp);
 app.route('/', ssrApp);
 
 app.onError((cause) => {
-  console.error(cause);
-
   if (cause instanceof HTTPException) {
     return cause.getResponse();
   }

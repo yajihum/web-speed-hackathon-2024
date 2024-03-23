@@ -28,7 +28,7 @@ export default defineConfig(async (): Promise<Options[]> => {
       shims: true,
       sourcemap: true,
       splitting: false,
-      target: 'node18',
+      target: 'node21',
       treeshake: false,
     },
   ];
