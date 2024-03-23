@@ -3,11 +3,6 @@ import React, { useId } from 'react';
 import styled from 'styled-components';
 
 import { DialogContentAtom } from '../atoms/DialogContentAtom';
-import { COMPANY } from '../constants/Company';
-import { CONTACT } from '../constants/Contact';
-import { OVERVIEW } from '../constants/Overview';
-import { QUESTION } from '../constants/Question';
-import { TERM } from '../constants/Term';
 import { Color, Space, Typography } from '../styles/variables';
 
 import { Box } from './Box';
@@ -39,70 +34,100 @@ export const Footer: React.FC = () => {
 
   const updateDialogContent = useSetAtom(DialogContentAtom);
 
-  const handleRequestToTermDialogOpen = () => {
+  const handleRequestToTermDialogOpen = async () => {
+    const { TERM } = await import('../constants/Term');
     updateDialogContent(
-      <_Content aria-labelledby={termDialogA11yId} role="dialog">
-        <Text as="h2" color={Color.MONO_100} id={termDialogA11yId} typography={Typography.NORMAL16}>
+      <_Content aria-labelledby={termDialogA11yId} role='dialog'>
+        <Text
+          as='h2'
+          color={Color.MONO_100}
+          id={termDialogA11yId}
+          typography={Typography.NORMAL16}
+        >
           利用規約
         </Text>
         <Spacer height={Space * 1} />
-        <Text as="p" color={Color.MONO_100} typography={Typography.NORMAL12}>
+        <Text as='p' color={Color.MONO_100} typography={Typography.NORMAL12}>
           {TERM}
         </Text>
       </_Content>,
     );
   };
 
-  const handleRequestToContactDialogOpen = () => {
+  const handleRequestToContactDialogOpen = async () => {
+    const { CONTACT } = await import('../constants/Contact');
     updateDialogContent(
-      <_Content aria-labelledby={contactDialogA11yId} role="dialog">
-        <Text as="h2" color={Color.MONO_100} id={contactDialogA11yId} typography={Typography.NORMAL16}>
+      <_Content aria-labelledby={contactDialogA11yId} role='dialog'>
+        <Text
+          as='h2'
+          color={Color.MONO_100}
+          id={contactDialogA11yId}
+          typography={Typography.NORMAL16}
+        >
           お問い合わせ
         </Text>
         <Spacer height={Space * 1} />
-        <Text as="p" color={Color.MONO_100} typography={Typography.NORMAL12}>
+        <Text as='p' color={Color.MONO_100} typography={Typography.NORMAL12}>
           {CONTACT}
         </Text>
       </_Content>,
     );
   };
 
-  const handleRequestToQuestionDialogOpen = () => {
+  const handleRequestToQuestionDialogOpen = async () => {
+    const { QUESTION } = await import('../constants/Question');
     updateDialogContent(
-      <_Content aria-labelledby={questionDialogA11yId} role="dialog">
-        <Text as="h2" color={Color.MONO_100} id={questionDialogA11yId} typography={Typography.NORMAL16}>
+      <_Content aria-labelledby={questionDialogA11yId} role='dialog'>
+        <Text
+          as='h2'
+          color={Color.MONO_100}
+          id={questionDialogA11yId}
+          typography={Typography.NORMAL16}
+        >
           Q&A
         </Text>
         <Spacer height={Space * 1} />
-        <Text as="p" color={Color.MONO_100} typography={Typography.NORMAL12}>
+        <Text as='p' color={Color.MONO_100} typography={Typography.NORMAL12}>
           {QUESTION}
         </Text>
       </_Content>,
     );
   };
 
-  const handleRequestToCompanyDialogOpen = () => {
+  const handleRequestToCompanyDialogOpen = async () => {
+    const { COMPANY } = await import('../constants/Company');
     updateDialogContent(
-      <_Content aria-labelledby={companyDialogA11yId} role="dialog">
-        <Text as="h2" color={Color.MONO_100} id={companyDialogA11yId} typography={Typography.NORMAL16}>
+      <_Content aria-labelledby={companyDialogA11yId} role='dialog'>
+        <Text
+          as='h2'
+          color={Color.MONO_100}
+          id={companyDialogA11yId}
+          typography={Typography.NORMAL16}
+        >
           運営会社
         </Text>
         <Spacer height={Space * 1} />
-        <Text as="p" color={Color.MONO_100} typography={Typography.NORMAL12}>
+        <Text as='p' color={Color.MONO_100} typography={Typography.NORMAL12}>
           {COMPANY}
         </Text>
       </_Content>,
     );
   };
 
-  const handleRequestToOverviewDialogOpen = () => {
+  const handleRequestToOverviewDialogOpen = async () => {
+    const { OVERVIEW } = await import('../constants/Overview');
     updateDialogContent(
-      <_Content aria-labelledby={overviewDialogA11yId} role="dialog">
-        <Text as="h2" color={Color.MONO_100} id={overviewDialogA11yId} typography={Typography.NORMAL16}>
+      <_Content aria-labelledby={overviewDialogA11yId} role='dialog'>
+        <Text
+          as='h2'
+          color={Color.MONO_100}
+          id={overviewDialogA11yId}
+          typography={Typography.NORMAL16}
+        >
           Cyber TOONとは
         </Text>
         <Spacer height={Space * 1} />
-        <Text as="p" color={Color.MONO_100} typography={Typography.NORMAL12}>
+        <Text as='p' color={Color.MONO_100} typography={Typography.NORMAL12}>
           {OVERVIEW}
         </Text>
       </_Content>,
@@ -110,23 +135,40 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <Box as="footer" backgroundColor={Color.Background} p={Space * 1}>
-      <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
-        <img alt="Cyber TOON" src="/assets/cyber-toon.svg" />
-        <Flex align="start" direction="row" gap={Space * 1.5} justify="center">
+    <Box as='footer' backgroundColor={Color.Background} p={Space * 1}>
+      <Flex
+        align='flex-start'
+        direction='column'
+        gap={Space * 1}
+        justify='flex-start'
+      >
+        <img alt='Cyber TOON' loading='lazy' src='/assets/cyber-toon.svg' />
+        <Flex align='start' direction='row' gap={Space * 1.5} justify='center'>
           <_Button disabled={!isClient} onClick={handleRequestToTermDialogOpen}>
             利用規約
           </_Button>
-          <_Button disabled={!isClient} onClick={handleRequestToContactDialogOpen}>
+          <_Button
+            disabled={!isClient}
+            onClick={handleRequestToContactDialogOpen}
+          >
             お問い合わせ
           </_Button>
-          <_Button disabled={!isClient} onClick={handleRequestToQuestionDialogOpen}>
+          <_Button
+            disabled={!isClient}
+            onClick={handleRequestToQuestionDialogOpen}
+          >
             Q&A
           </_Button>
-          <_Button disabled={!isClient} onClick={handleRequestToCompanyDialogOpen}>
+          <_Button
+            disabled={!isClient}
+            onClick={handleRequestToCompanyDialogOpen}
+          >
             運営会社
           </_Button>
-          <_Button disabled={!isClient} onClick={handleRequestToOverviewDialogOpen}>
+          <_Button
+            disabled={!isClient}
+            onClick={handleRequestToOverviewDialogOpen}
+          >
             Cyber TOONとは
           </_Button>
         </Flex>
