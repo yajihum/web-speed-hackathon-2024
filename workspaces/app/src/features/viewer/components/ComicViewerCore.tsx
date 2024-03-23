@@ -1,4 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
+import { useInterval, useUpdate } from 'react-use';
 import styled from 'styled-components';
 
 import { addUnitIfNeeded } from '../../../lib/css/addUnitIfNeeded';
@@ -99,19 +100,9 @@ type Props = {
 };
 
 const ComicViewerCore: React.FC<Props> = ({ episodeId }) => {
-  const [, forceUpdate] = useState(0);
-
-  useEffect(() => {
-    const handleResize = () => {
-      forceUpdate((n) => n + 1);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  // 画面のリサイズに合わせて再描画する
+  const rerender = useUpdate();
+  useInterval(rerender, 0);
 
   const { data: episode } = useEpisode({ params: { episodeId } });
 

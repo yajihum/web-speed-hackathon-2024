@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useInterval, useUpdate } from 'react-use';
 import styled from 'styled-components';
 
 import { ComicViewerCore } from '../../../features/viewer/components/ComicViewerCore';
@@ -33,21 +34,11 @@ type Props = {
 };
 
 export const ComicViewer: React.FC<Props> = ({ episodeId }) => {
-  const [, forceUpdate] = useState(0);
+  // 画面のリサイズに合わせて再描画する
+  const rerender = useUpdate();
+  useInterval(rerender, 0);
 
   const [el, ref] = useState<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      forceUpdate((n) => n + 1);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   // コンテナの幅
   const cqw = (el?.getBoundingClientRect().width ?? 0) / 100;
