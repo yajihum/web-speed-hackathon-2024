@@ -1,14 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { SvgIcon } from "../../features/icons/components/SvgIcon";
-import { Link } from "../../foundation/components/Link";
-import { Text } from "../../foundation/components/Text";
+import { Search } from '../../features/icons/Svgs';
+import { Link } from '../../foundation/components/Link';
+import { Text } from '../../foundation/components/Text';
 import {
-	Color,
-	Radius,
-	Space,
-	Typography,
-} from "../../foundation/styles/variables";
+  Color,
+  Radius,
+  Space,
+  Typography,
+} from '../../foundation/styles/variables';
 
 const _ImageWrapper = styled.div`
   aspect-ratio: 16 / 9;
@@ -44,17 +44,17 @@ const _SearchLink = styled(Link)`
 `;
 
 export const CoverSection: React.FC = () => {
-	return (
-		<_Wrapper>
-			<_ImageWrapper>
-				<_Image alt="Cyber TOON" src="/assets/hero-image.webp" />
-			</_ImageWrapper>
-			<_SearchLink href="/search">
-				<SvgIcon color={Color.MONO_A} height={24} type="Search" width={24} />
-				<Text color={Color.MONO_A} typography={Typography.NORMAL16}>
-					検索
-				</Text>
-			</_SearchLink>
-		</_Wrapper>
-	);
+  return (
+    <_Wrapper>
+      <_ImageWrapper>
+        <_Image alt='Cyber TOON' src='/assets/hero-image.webp' />
+      </_ImageWrapper>
+      <_SearchLink href='/search'>
+        <Search />
+        <Text color={Color.MONO_A} typography={Typography.NORMAL16}>
+          検索
+        </Text>
+      </_SearchLink>
+    </_Wrapper>
+  );
 };

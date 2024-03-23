@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import styled from 'styled-components';
 
-import { SvgIcon } from '../../../features/icons/components/SvgIcon';
 import { Box } from '../../../foundation/components/Box';
 import { Flex } from '../../../foundation/components/Flex';
 import { Image } from '../../../foundation/components/Image';
@@ -10,8 +9,14 @@ import { Separator } from '../../../foundation/components/Separator';
 import { Spacer } from '../../../foundation/components/Spacer';
 import { Text } from '../../../foundation/components/Text';
 import { useImage } from '../../../foundation/hooks/useImage';
-import { Color, Radius, Space, Typography } from '../../../foundation/styles/variables';
+import {
+  Color,
+  Radius,
+  Space,
+  Typography,
+} from '../../../foundation/styles/variables';
 import { useBook } from '../../book/hooks/useBook';
+import { NavigateNext } from '../../icons/Svgs';
 
 const _Wrapper = styled.li`
   width: 100%;
@@ -45,37 +50,60 @@ const RankingCard: React.FC<Props> = ({ bookId }) => {
   const { data: book } = useBook({ params: { bookId } });
 
   const imageUrl = useImage({ height: 96, imageId: book.image.id, width: 96 });
-  const authorImageUrl = useImage({ height: 32, imageId: book.author.image.id, width: 32 });
+  const authorImageUrl = useImage({
+    height: 32,
+    imageId: book.author.image.id,
+    width: 32,
+  });
 
   return (
     <_Wrapper>
       <_Link href={`/books/${book.id}`}>
         <Spacer height={Space * 1.5} />
-        <Flex align="flex-start" gap={Space * 2.5} justify="flex-start">
+        <Flex align='flex-start' gap={Space * 2.5} justify='flex-start'>
           {imageUrl != null && (
             <_ImgWrapper>
-              <Image alt={book.name} height={96} objectFit="cover" src={imageUrl} width={96} />
+              <Image
+                alt={book.name}
+                height={96}
+                objectFit='cover'
+                src={imageUrl}
+                width={96}
+              />
             </_ImgWrapper>
           )}
-          <Box width="100%">
-            <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
-              <Text color={Color.MONO_100} typography={Typography.NORMAL16} weight="bold">
+          <Box width='100%'>
+            <Flex
+              align='flex-start'
+              direction='column'
+              gap={Space * 1}
+              justify='flex-start'
+            >
+              <Text
+                color={Color.MONO_100}
+                typography={Typography.NORMAL16}
+                weight='bold'
+              >
                 {book.name}
               </Text>
-              <Text as="p" color={Color.MONO_80} typography={Typography.NORMAL12}>
+              <Text
+                as='p'
+                color={Color.MONO_80}
+                typography={Typography.NORMAL12}
+              >
                 {book.description}
               </Text>
             </Flex>
 
             <Spacer height={Space * 1} />
 
-            <Flex align="center" gap={Space * 1} justify="flex-end">
+            <Flex align='center' gap={Space * 1} justify='flex-end'>
               {authorImageUrl != null && (
                 <_AvatarWrapper>
                   <Image
                     alt={`${book.author.name}のアイコン`}
                     height={32}
-                    objectFit="cover"
+                    objectFit='cover'
                     src={authorImageUrl}
                     width={32}
                   />
@@ -88,11 +116,15 @@ const RankingCard: React.FC<Props> = ({ bookId }) => {
 
             <Spacer height={Space * 1} />
 
-            <Flex align="center" justify="flex-end">
-              <Text color={Color.Secondary} typography={Typography.NORMAL14} weight="bold">
+            <Flex align='center' justify='flex-end'>
+              <Text
+                color={Color.Secondary}
+                typography={Typography.NORMAL14}
+                weight='bold'
+              >
                 この漫画を読む
               </Text>
-              <SvgIcon color={Color.Secondary} height={32} type="NavigateNext" width={32} />
+              <NavigateNext />
             </Flex>
           </Box>
         </Flex>
