@@ -129,9 +129,6 @@ importers:
       jquery:
         specifier: 3.7.1
         version: 3.7.1
-      moment-timezone:
-        specifier: 0.5.45
-        version: 0.5.45
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -380,9 +377,6 @@ importers:
       log4js:
         specifier: 6.9.1
         version: 6.9.1
-      moment-timezone:
-        specifier: 0.5.45
-        version: 0.5.45
       neverthrow:
         specifier: 6.1.0
         version: 6.1.0
@@ -7404,16 +7398,6 @@ packages:
   /mockdate@3.0.5:
     resolution: {integrity: sha512-iniQP4rj1FhBdBYS/+eQv7j1tadJ9lJtdzgOpvsOHng/GbcDh2Fhdeq+ZRldrPYdXvCyfFUmFeEwEGXZB5I/AQ==}
     dev: true
-
-  /moment-timezone@0.5.45:
-    resolution: {integrity: sha512-HIWmqA86KcmCAhnMAN0wuDOARV/525R2+lOLotuGFzn4HO+FH+/645z2wx0Dt3iDv6/p61SIvKnDstISainhLQ==}
-    dependencies:
-      moment: 2.30.1
-    dev: false
-
-  /moment@2.30.1:
-    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
-    dev: false
 
   /monotone-chain-convex-hull@1.1.0:
     resolution: {integrity: sha512-iZGaoO2qtqIWaAfscTtsH2LolE06U4JzTw8AgtjT/yzYIA0aoAHDdwBtsesnQXfVRvS375Wu0Y1+FqdI5Y22GA==}

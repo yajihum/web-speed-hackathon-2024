@@ -29,7 +29,6 @@
     "jsdom": "24.0.0",
     "jsesc": "3.0.2",
     "log4js": "6.9.1",
-    "moment-timezone": "0.5.45",
     "neverthrow": "6.1.0",
     "pkg-dir": "5.0.0",
     "react": "18.2.0",
