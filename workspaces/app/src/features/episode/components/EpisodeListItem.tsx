@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import type { GetBookEpisodesResponse } from '@wsh-2024/schema/src/api/books/GetBookResponse';
+
 import { Box } from '../../../foundation/components/Box';
 import { Flex } from '../../../foundation/components/Flex';
 import { Image } from '../../../foundation/components/Image';
@@ -13,8 +15,6 @@ import {
   Space,
   Typography,
 } from '../../../foundation/styles/variables';
-import { getImageUrl } from '../../../lib/image/getImageUrl';
-import { useEpisode } from '../hooks/useEpisode';
 
 const _Wrapper = styled.li`
   width: 100%;
@@ -34,33 +34,24 @@ const _ImgWrapper = styled.div`
 
 type Props = {
   bookId: string;
-  episodeId: string;
+  episode: GetBookEpisodesResponse;
 };
 
-export const EpisodeListItem: React.FC<Props> = ({ bookId, episodeId }) => {
-  const { data: episode } = useEpisode({ params: { episodeId } });
-
-  const imageUrl = getImageUrl({
-    format: 'webp',
-    imageId: episode.image.id,
-  });
-
+export const EpisodeListItem: React.FC<Props> = ({ bookId, episode }) => {
   return (
     <_Wrapper>
       <_Link href={`/books/${bookId}/episodes/${episode.id}`}>
         <Spacer height={Space * 1.5} />
         <Flex align='flex-start' gap={Space * 2.5} justify='flex-start'>
-          {imageUrl != null && (
-            <_ImgWrapper>
-              <Image
-                alt={episode.name}
-                height={96}
-                objectFit='cover'
-                src={imageUrl}
-                width={96}
-              />
-            </_ImgWrapper>
-          )}
+          <_ImgWrapper>
+            <Image
+              alt={episode.name}
+              height={96}
+              objectFit='cover'
+              src={`/images/${episode.imageId}.webp`}
+              width={96}
+            />
+          </_ImgWrapper>
           <Box width='100%'>
             <Flex
               align='flex-start'

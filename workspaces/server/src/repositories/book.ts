@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { HTTPException } from 'hono/http-exception';
-import { err, ok } from 'neverthrow';
 import type { Result } from 'neverthrow';
+import { err, ok } from 'neverthrow';
 
 import type { DeleteBookRequestParams } from '@wsh-2024/schema/src/api/books/DeleteBookRequestParams';
 import type { DeleteBookResponse } from '@wsh-2024/schema/src/api/books/DeleteBookResponse';
@@ -14,15 +14,30 @@ import type { PatchBookRequestParams } from '@wsh-2024/schema/src/api/books/Patc
 import type { PatchBookResponse } from '@wsh-2024/schema/src/api/books/PatchBookResponse';
 import type { PostBookRequestBody } from '@wsh-2024/schema/src/api/books/PostBookRequestBody';
 import type { PostBookResponse } from '@wsh-2024/schema/src/api/books/PostBookResponse';
-import { author, book, episode, episodePage, feature, ranking } from '@wsh-2024/schema/src/models';
+import {
+  author,
+  book,
+  episode,
+  episodePage,
+  feature,
+  ranking,
+} from '@wsh-2024/schema/src/models';
 
 import { getDatabase } from '../database/drizzle';
 
 type BookRepositoryInterface = {
-  create(options: { body: PostBookRequestBody }): Promise<Result<PostBookResponse, HTTPException>>;
-  delete(options: { params: DeleteBookRequestParams }): Promise<Result<DeleteBookResponse, HTTPException>>;
-  read(options: { params: GetBookRequestParams }): Promise<Result<GetBookResponse, HTTPException>>;
-  readAll(options: { query: GetBookListRequestQuery }): Promise<Result<GetBookListResponse, HTTPException>>;
+  create(options: { body: PostBookRequestBody }): Promise<
+    Result<PostBookResponse, HTTPException>
+  >;
+  delete(options: { params: DeleteBookRequestParams }): Promise<
+    Result<DeleteBookResponse, HTTPException>
+  >;
+  read(options: { params: GetBookRequestParams }): Promise<
+    Result<GetBookResponse, HTTPException>
+  >;
+  readAll(options: { query: GetBookListRequestQuery }): Promise<
+    Result<GetBookListResponse, HTTPException>
+  >;
   update(options: {
     body: PatchBookRequestBody;
     params: PatchBookRequestParams;
@@ -30,7 +45,9 @@ type BookRepositoryInterface = {
 };
 
 class BookRepository implements BookRepositoryInterface {
-  async read(options: { params: GetBookRequestParams }): Promise<Result<GetBookResponse, HTTPException>> {
+  async read(options: { params: GetBookRequestParams }): Promise<
+    Result<GetBookResponse, HTTPException>
+  > {
     try {
       const data = await getDatabase().query.book.findFirst({
         columns: {
@@ -60,7 +77,12 @@ class BookRepository implements BookRepositoryInterface {
           },
           episodes: {
             columns: {
+              chapter: true,
+              description: true,
               id: true,
+              imageId: true,
+              name: true,
+              nameRuby: true,
             },
           },
           image: {
@@ -73,18 +95,27 @@ class BookRepository implements BookRepositoryInterface {
       });
 
       if (data == null) {
-        throw new HTTPException(404, { message: `Book:${options.params.bookId} is not found` });
+        throw new HTTPException(404, {
+          message: `Book:${options.params.bookId} is not found`,
+        });
       }
       return ok(data);
     } catch (cause) {
       if (cause instanceof HTTPException) {
         return err(cause);
       }
-      return err(new HTTPException(500, { cause, message: `Failed to read book:${options.params.bookId}.` }));
+      return err(
+        new HTTPException(500, {
+          cause,
+          message: `Failed to read book:${options.params.bookId}.`,
+        }),
+      );
     }
   }
 
-  async readAll(options: { query: GetBookListRequestQuery }): Promise<Result<GetBookListResponse, HTTPException>> {
+  async readAll(options: { query: GetBookListRequestQuery }): Promise<
+    Result<GetBookListResponse, HTTPException>
+  > {
     try {
       const data = await getDatabase().query.book.findMany({
         columns: {
@@ -145,13 +176,21 @@ class BookRepository implements BookRepositoryInterface {
       if (cause instanceof HTTPException) {
         return err(cause);
       }
-      return err(new HTTPException(500, { cause, message: `Failed to read book list.` }));
+      return err(
+        new HTTPException(500, { cause, message: `Failed to read book list.` }),
+      );
     }
   }
 
-  async create(options: { body: PostBookRequestBody }): Promise<Result<PostBookResponse, HTTPException>> {
+  async create(options: { body: PostBookRequestBody }): Promise<
+    Result<PostBookResponse, HTTPException>
+  > {
     try {
-      const result = await getDatabase().insert(book).values(options.body).returning({ bookId: book.id }).execute();
+      const result = await getDatabase()
+        .insert(book)
+        .values(options.body)
+        .returning({ bookId: book.id })
+        .execute();
 
       if (result[0] == null) {
         throw new HTTPException(500, { message: 'Failed to create book.' });
@@ -165,7 +204,9 @@ class BookRepository implements BookRepositoryInterface {
       if (cause instanceof HTTPException) {
         return err(cause);
       }
-      return err(new HTTPException(500, { cause, message: `Failed to create book.` }));
+      return err(
+        new HTTPException(500, { cause, message: `Failed to create book.` }),
+      );
     }
   }
 
@@ -182,7 +223,9 @@ class BookRepository implements BookRepositoryInterface {
         .execute();
 
       if (result[0] == null) {
-        throw new HTTPException(500, { message: `Failed to update book:${options.params.bookId}.` });
+        throw new HTTPException(500, {
+          message: `Failed to update book:${options.params.bookId}.`,
+        });
       }
       return this.read({
         params: {
@@ -193,16 +236,32 @@ class BookRepository implements BookRepositoryInterface {
       if (cause instanceof HTTPException) {
         return err(cause);
       }
-      return err(new HTTPException(500, { cause, message: `Failed to update book:${options.params.bookId}.` }));
+      return err(
+        new HTTPException(500, {
+          cause,
+          message: `Failed to update book:${options.params.bookId}.`,
+        }),
+      );
     }
   }
 
-  async delete(options: { params: DeleteBookRequestParams }): Promise<Result<DeleteBookResponse, HTTPException>> {
+  async delete(options: { params: DeleteBookRequestParams }): Promise<
+    Result<DeleteBookResponse, HTTPException>
+  > {
     try {
       getDatabase().transaction(async (tx) => {
-        await tx.delete(book).where(eq(book.id, options.params.bookId)).execute();
-        await tx.delete(feature).where(eq(feature.bookId, options.params.bookId)).execute();
-        await tx.delete(ranking).where(eq(ranking.bookId, options.params.bookId)).execute();
+        await tx
+          .delete(book)
+          .where(eq(book.id, options.params.bookId))
+          .execute();
+        await tx
+          .delete(feature)
+          .where(eq(feature.bookId, options.params.bookId))
+          .execute();
+        await tx
+          .delete(ranking)
+          .where(eq(ranking.bookId, options.params.bookId))
+          .execute();
         const deleteEpisodeRes = await tx
           .delete(episode)
           .where(eq(episode.bookId, options.params.bookId))
@@ -211,7 +270,10 @@ class BookRepository implements BookRepositoryInterface {
           })
           .execute();
         for (const episode of deleteEpisodeRes) {
-          await tx.delete(episodePage).where(eq(episodePage.episodeId, episode.episodeId)).execute();
+          await tx
+            .delete(episodePage)
+            .where(eq(episodePage.episodeId, episode.episodeId))
+            .execute();
         }
       });
 
@@ -220,7 +282,12 @@ class BookRepository implements BookRepositoryInterface {
       if (cause instanceof HTTPException) {
         return err(cause);
       }
-      return err(new HTTPException(500, { cause, message: `Failed to delete book:${options.params.bookId}.` }));
+      return err(
+        new HTTPException(500, {
+          cause,
+          message: `Failed to delete book:${options.params.bookId}.`,
+        }),
+      );
     }
   }
 }

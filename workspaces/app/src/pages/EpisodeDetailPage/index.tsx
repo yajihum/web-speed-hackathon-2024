@@ -32,11 +32,7 @@ const EpisodeList = ({ bookId }: { bookId: string | undefined }) => {
       <Flex align='center' as='ul' direction='column' justify='center'>
         {book.episodes.map((episode) => (
           <Suspense key={episode.id} fallback={null}>
-            <EpisodeListItem
-              key={episode.id}
-              bookId={bookId || ''}
-              episodeId={episode.id}
-            />
+            <EpisodeListItem bookId={bookId || ''} episode={episode} />
           </Suspense>
         ))}
       </Flex>

@@ -25,7 +25,12 @@ export const GetBookResponseSchema = createSelectSchema(book)
       }),
     episodes: createSelectSchema(episode)
       .pick({
+        chapter: true,
+        description: true,
         id: true,
+        imageId: true,
+        name: true,
+        nameRuby: true,
       })
       .array(),
     image: createSelectSchema(image).pick({
@@ -35,3 +40,16 @@ export const GetBookResponseSchema = createSelectSchema(book)
   });
 
 export type GetBookResponse = z.infer<typeof GetBookResponseSchema>;
+
+export const GetBookEpisodesResponseSchema = createSelectSchema(episode).pick({
+  chapter: true,
+  description: true,
+  id: true,
+  imageId: true,
+  name: true,
+  nameRuby: true,
+});
+
+export type GetBookEpisodesResponse = z.infer<
+  typeof GetBookEpisodesResponseSchema
+>;
