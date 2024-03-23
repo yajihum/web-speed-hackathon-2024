@@ -13,7 +13,6 @@ import {
   Space,
   Typography,
 } from '../../../foundation/styles/variables';
-import { getImageUrl } from '../../../lib/image/getImageUrl';
 
 const _Wrapper = styled(Link)`
   display: grid;
@@ -56,28 +55,17 @@ type Props = {
 const FeatureCard: React.FC<Props> = ({ feature }) => {
   const { book } = feature;
 
-  const imageUrl = getImageUrl({
-    format: 'webp',
-    imageId: book.image.id,
-  });
-  const authorImageUrl = getImageUrl({
-    format: 'webp',
-    imageId: book.author.image.id,
-  });
-
   return (
     <_Wrapper href={`/books/${feature.book.id}`}>
-      {imageUrl != null && (
-        <_ImgWrapper>
-          <Image
-            alt={book.image.alt}
-            height={96}
-            objectFit='cover'
-            src={imageUrl}
-            width={96}
-          />
-        </_ImgWrapper>
-      )}
+      <_ImgWrapper>
+        <Image
+          alt={book.image.alt}
+          height={96}
+          objectFit='cover'
+          src={`/assets/images/${book.image.id}.webp`}
+          width={96}
+        />
+      </_ImgWrapper>
 
       <_ContentWrapper>
         <Text
@@ -92,17 +80,15 @@ const FeatureCard: React.FC<Props> = ({ feature }) => {
         </Text>
 
         <Flex align='center' gap={Space * 1} justify='flex-end'>
-          {authorImageUrl != null && (
-            <_AvatarWrapper>
-              <Image
-                alt={book.author.name}
-                height={32}
-                objectFit='cover'
-                src={authorImageUrl}
-                width={32}
-              />
-            </_AvatarWrapper>
-          )}
+          <_AvatarWrapper>
+            <Image
+              alt={book.author.name}
+              height={32}
+              objectFit='cover'
+              src={`/assets/images/${book.author.image.id}.webp`}
+              width={32}
+            />
+          </_AvatarWrapper>
           <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
             {book.author.name}
           </Text>

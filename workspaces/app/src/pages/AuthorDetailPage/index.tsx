@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import type { RouteParams } from 'regexparam';
 import { styled } from 'styled-components';
 
-import { getImageUrl } from '../../../../admin/src/lib/image/getImageUrl';
 import { useAuthor } from '../../features/author/hooks/useAuthor';
 import { BookListItem } from '../../features/book/components/BookListItem';
 import { Box } from '../../foundation/components/Box';
@@ -35,28 +34,21 @@ const AuthorDetailPage: React.FC = () => {
 
   const { data: author } = useAuthor({ params: { authorId: authorId || '' } });
 
-  const imageUrl = getImageUrl({
-    format: 'webp',
-    imageId: author.image.id,
-  });
-
   const bookListA11yId = useId();
 
   return (
     <Box height='100%' px={Space * 2}>
       <_HeadingWrapper aria-label='作者情報'>
-        {imageUrl != null && (
-          <_AuthorImageWrapper>
-            <Image
-              key={author.id}
-              alt={author.name}
-              height={128}
-              objectFit='cover'
-              src={imageUrl}
-              width={128}
-            />
-          </_AuthorImageWrapper>
-        )}
+        <_AuthorImageWrapper>
+          <Image
+            key={author.id}
+            alt={author.name}
+            height={128}
+            objectFit='cover'
+            src={`/assets/images/${author.image.id}.webp`}
+            width={128}
+          />
+        </_AuthorImageWrapper>
 
         <Flex
           align='flex-start'

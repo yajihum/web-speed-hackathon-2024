@@ -13,7 +13,6 @@ import {
   Space,
   Typography,
 } from '../../../foundation/styles/variables';
-import { getImageUrl } from '../../../lib/image/getImageUrl';
 import { useBook } from '../hooks/useBook';
 
 const _Wrapper = styled.li`
@@ -38,27 +37,21 @@ type Props = {
 
 export const BookListItem: React.FC<Props> = ({ bookId }) => {
   const { data: book } = useBook({ params: { bookId } });
-  const imageUrl = getImageUrl({
-    format: 'webp',
-    imageId: book.image.id,
-  });
 
   return (
     <_Wrapper>
       <_Link href={`/books/${book.id}`}>
         <Spacer height={Space * 1.5} />
         <Flex align='flex-start' gap={Space * 2.5} justify='flex-start'>
-          {imageUrl != null && (
-            <_ImgWrapper>
-              <Image
-                alt={book.name}
-                height={64}
-                objectFit='cover'
-                src={imageUrl}
-                width={64}
-              />
-            </_ImgWrapper>
-          )}
+          <_ImgWrapper>
+            <Image
+              alt={book.name}
+              height={64}
+              objectFit='cover'
+              src={`/assets/images/${book.image.id}.webp`}
+              width={64}
+            />
+          </_ImgWrapper>
           <Box width='100%'>
             <Flex
               align='flex-start'

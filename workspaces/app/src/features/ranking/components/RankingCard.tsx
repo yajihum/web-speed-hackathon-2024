@@ -16,7 +16,6 @@ import {
   Space,
   Typography,
 } from '../../../foundation/styles/variables';
-import { getImageUrl } from '../../../lib/image/getImageUrl';
 import { NavigateNext } from '../../icons/Svgs';
 
 const _Wrapper = styled.li`
@@ -50,32 +49,20 @@ type Props = {
 const RankingCard: React.FC<Props> = ({ ranking }) => {
   const { book } = ranking;
 
-  const imageUrl = getImageUrl({
-    format: 'webp',
-    imageId: book.image.id,
-  });
-
-  const authorImageUrl = getImageUrl({
-    format: 'webp',
-    imageId: book.author.image.id,
-  });
-
   return (
     <_Wrapper>
       <_Link href={`/books/${book.id}`}>
         <Spacer height={Space * 1.5} />
         <Flex align='flex-start' gap={Space * 2.5} justify='flex-start'>
-          {imageUrl != null && (
-            <_ImgWrapper>
-              <Image
-                alt={book.name}
-                height={96}
-                objectFit='cover'
-                src={imageUrl}
-                width={96}
-              />
-            </_ImgWrapper>
-          )}
+          <_ImgWrapper>
+            <Image
+              alt={book.name}
+              height={96}
+              objectFit='cover'
+              src={`/assets/images/${book.image.id}.webp`}
+              width={96}
+            />
+          </_ImgWrapper>
           <Box width='100%'>
             <Flex
               align='flex-start'
@@ -102,17 +89,15 @@ const RankingCard: React.FC<Props> = ({ ranking }) => {
             <Spacer height={Space * 1} />
 
             <Flex align='center' gap={Space * 1} justify='flex-end'>
-              {authorImageUrl != null && (
-                <_AvatarWrapper>
-                  <Image
-                    alt={`${book.author.name}のアイコン`}
-                    height={32}
-                    objectFit='cover'
-                    src={authorImageUrl}
-                    width={32}
-                  />
-                </_AvatarWrapper>
-              )}
+              <_AvatarWrapper>
+                <Image
+                  alt={`${book.author.name}のアイコン`}
+                  height={32}
+                  objectFit='cover'
+                  src={`/assets/images/${book.author.image.id}.webp`}
+                  width={32}
+                />
+              </_AvatarWrapper>
               <Text color={Color.MONO_80} typography={Typography.NORMAL12}>
                 {book.author.name}
               </Text>

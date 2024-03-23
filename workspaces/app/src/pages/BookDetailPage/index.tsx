@@ -103,7 +103,7 @@ const BookDetailPage: React.FC = () => {
           alt={book.name}
           height={256}
           objectFit='cover'
-          src={`/images/${book.image.id}.webp`}
+          src={`/assets/images/${book.image.id}.webp`}
           width={192}
         />
         <Flex
@@ -138,7 +138,7 @@ const BookDetailPage: React.FC = () => {
                 alt={book.author.name}
                 height={32}
                 objectFit='cover'
-                src={`/images/${book.author.image.id}.webp`}
+                src={`/assets/images/${book.author.image.id}.webp`}
                 width={32}
               />
             </_AvatarWrapper>

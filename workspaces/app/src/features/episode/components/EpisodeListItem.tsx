@@ -48,7 +48,7 @@ export const EpisodeListItem: React.FC<Props> = ({ bookId, episode }) => {
               alt={episode.name}
               height={96}
               objectFit='cover'
-              src={`/images/${episode.imageId}.webp`}
+              src={`/assets/images/${episode.imageId}.webp`}
               width={96}
             />
           </_ImgWrapper>
