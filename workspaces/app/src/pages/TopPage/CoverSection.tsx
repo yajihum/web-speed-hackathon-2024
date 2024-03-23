@@ -49,8 +49,17 @@ export const CoverSection: React.FC = () => {
       <_ImageWrapper>
         <_Image
           alt='Cyber TOON'
+          decoding='async'
           loading='eager'
-          src='/assets/hero-image.webp'
+          sizes='(max-width: 1024px) 100vw, 1024px'
+          src='/assets/hero-image-1024.webp'
+          srcSet={[
+            '/assets/hero-image-256.webp 256w',
+            '/assets/hero-image-384.webp 384w',
+            '/assets/hero-image-512.webp 512w',
+            '/assets/hero-image-768.webp 768w',
+            '/assets/hero-image-1024.webp 1024w',
+          ].join(',')}
         />
       </_ImageWrapper>
       <_SearchLink href='/search'>
