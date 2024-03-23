@@ -47,7 +47,11 @@ export const CoverSection: React.FC = () => {
   return (
     <_Wrapper>
       <_ImageWrapper>
-        <_Image alt='Cyber TOON' src='/assets/hero-image.webp' />
+        <_Image
+          alt='Cyber TOON'
+          loading='eager'
+          src='/assets/hero-image.webp'
+        />
       </_ImageWrapper>
       <_SearchLink href='/search'>
         <Search />

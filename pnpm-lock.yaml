@@ -120,9 +120,6 @@ importers:
       jotai:
         specifier: 2.7.0
         version: 2.7.0(@types/react@18.2.0)(react@18.2.0)
-      jquery:
-        specifier: 3.7.1
-        version: 3.7.1
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -147,9 +144,6 @@ importers:
       swr:
         specifier: 2.2.4
         version: 2.2.4(react@18.2.0)
-      three:
-        specifier: 0.162.0
-        version: 0.162.0
       tiny-invariant:
         specifier: 1.3.3
         version: 1.3.3
@@ -160,9 +154,6 @@ importers:
         specifier: 3.22.4
         version: 3.22.4
     devDependencies:
-      '@types/jquery':
-        specifier: 3.5.29
-        version: 3.5.29
       '@types/react':
         specifier: 18.2.0
         version: 18.2.0
@@ -172,9 +163,6 @@ importers:
       '@types/styled-components':
         specifier: 5.1.34
         version: 5.1.34
-      '@types/three':
-        specifier: 0.162.0
-        version: 0.162.0
 
   workspaces/client:
     dependencies:
@@ -208,9 +196,6 @@ importers:
       jimp:
         specifier: 0.22.12
         version: 0.22.12
-      jquery:
-        specifier: 3.7.1
-        version: 3.7.1
       p-queue:
         specifier: 8.0.1
         version: 8.0.1
@@ -242,9 +227,6 @@ importers:
       '@types/jimp':
         specifier: 0.2.28
         version: 0.2.28
-      '@types/jquery':
-        specifier: 3.5.29
-        version: 3.5.29
       '@types/path-browserify':
         specifier: 1.0.2
         version: 1.0.2
@@ -3408,10 +3390,6 @@ packages:
     resolution: {integrity: sha512-MroLvRhMbqtXI5WBSwoomro6OQS4xnCoudUrMb20JO0vLKUs0bAaCEcvM/immEBSJjFAK1l6jW1oAO8q3Ancrg==}
     dev: true
 
-  /@tweenjs/tween.js@23.1.1:
-    resolution: {integrity: sha512-ZpboH7pCPPeyBWKf8c7TJswtCEQObFo3bOBYalm99NzZarATALYCo5OhbCa/n4RQyJyHfhkdx+hNrdL5ByFYDw==}
-    dev: true
-
   /@types/bcryptjs@2.4.6:
     resolution: {integrity: sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ==}
     dev: true
@@ -3448,12 +3426,6 @@ packages:
       jimp: 0.22.12
     transitivePeerDependencies:
       - encoding
-    dev: true
-
-  /@types/jquery@3.5.29:
-    resolution: {integrity: sha512-oXQQC9X9MOPRrMhPHHOsXqeQDnWeCDT3PelUIg/Oy8FAbzSZtFHRjc7IpbfFVmpLtJ+UOoywpRsuO5Jxjybyeg==}
-    dependencies:
-      '@types/sizzle': 2.3.8
     dev: true
 
   /@types/js-cookie@2.2.7:
@@ -3556,14 +3528,6 @@ packages:
     resolution: {integrity: sha512-EwzwfDMIWyo0ulkbLm4KrnnHBSJ9PmnPQCk1nM3tmTMl9lTJsldx9ZGPq4J1ZD2yroMQ8vzUf7FNlWgvfpN/jw==}
     dev: true
 
-  /@types/sizzle@2.3.8:
-    resolution: {integrity: sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg==}
-    dev: true
-
-  /@types/stats.js@0.17.3:
-    resolution: {integrity: sha512-pXNfAD3KHOdif9EQXZ9deK82HVNaXP5ZIF5RP2QG6OQFNTaY2YIetfrE9t528vEreGQvEPRDDc8muaoYeK0SxQ==}
-    dev: true
-
   /@types/styled-components@5.1.34:
     resolution: {integrity: sha512-mmiVvwpYklFIv9E8qfxuPyIt/OuyIrn6gMOAMOFUO3WJfSrSE+sGUoa4PiZj77Ut7bKZpaa6o1fBKS/4TOEvnA==}
     dependencies:
@@ -3576,26 +3540,12 @@ packages:
     resolution: {integrity: sha512-1Xve+NMN7FWjY14vLoY5tL3BVEQ/n42YLwaqJIPYhotZ9uBHt87VceMwWQpzmdEt2TNXIorIFG+YeCUUW7RInw==}
     dev: false
 
-  /@types/three@0.162.0:
-    resolution: {integrity: sha512-0j5yZcVukVIhrhSIC7+LmBPkkMoMuEJ1AfYBZfgNytdYqYREMuiyXWhYOMeZLBElTEAlJIZn7r2W3vqTIgjWlg==}
-    dependencies:
-      '@tweenjs/tween.js': 23.1.1
-      '@types/stats.js': 0.17.3
-      '@types/webxr': 0.5.14
-      fflate: 0.6.10
-      meshoptimizer: 0.18.1
-    dev: true
-
   /@types/underscore@1.11.15:
     resolution: {integrity: sha512-HP38xE+GuWGlbSRq9WrZkousaQ7dragtZCruBVMi0oX1migFZavZ3OROKHSkNp/9ouq82zrWtZpg18jFnVN96g==}
     dev: true
 
   /@types/uuid@9.0.7:
     resolution: {integrity: sha512-WUtIVRUZ9i5dYXefDEAI7sh9/O7jGvHg7Df/5O/gtH3Yabe5odI3UWopVR1qbPXQtvOxWu3mM4XxlYeZtMWF4g==}
-    dev: true
-
-  /@types/webxr@0.5.14:
-    resolution: {integrity: sha512-UEMMm/Xn3DtEa+gpzUrOcDj+SJS1tk5YodjwOxcqStNhCfPcwgyC5Srg2ToVKyg2Fhq16Ffpb0UWUQHqoT9AMA==}
     dev: true
 
   /@typescript-eslint/eslint-plugin@7.2.0(@typescript-eslint/parser@7.2.0)(eslint@8.57.0)(typescript@5.4.2):
@@ -5614,10 +5564,6 @@ packages:
     dependencies:
       reusify: 1.0.4
 
-  /fflate@0.6.10:
-    resolution: {integrity: sha512-IQrh3lEPM93wVCEczc9SaAOvkmcoQn/G8Bo1e8ZPlY3X3bnAxWaBdvTdvM1hP62iZp0BXWDy4vTAy4fF0+Dlpg==}
-    dev: true
-
   /fft.js@4.0.4:
     resolution: {integrity: sha512-f9c00hphOgeQTlDyavwTtu6RiK8AIFjD6+jvXkNkpeQ7rirK3uFWVpalkoS4LAwbdX7mfZ8aoBfFVQX1Re/8aw==}
     dev: false
@@ -6566,10 +6512,6 @@ packages:
   /jpeg-js@0.4.4:
     resolution: {integrity: sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==}
 
-  /jquery@3.7.1:
-    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
-    dev: false
-
   /js-cookie@2.2.1:
     resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
     dev: false
@@ -6868,10 +6810,6 @@ packages:
   /merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
-
-  /meshoptimizer@0.18.1:
-    resolution: {integrity: sha512-ZhoIoL7TNV4s5B6+rx5mC//fw8/POGyNxS/DZyCJeiZ12ScLfVwRE/GfsxwiTkMYYD5DmK2/JXnEVXqL4rF+Sw==}
-    dev: true
 
   /micromatch@4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
@@ -8840,10 +8778,6 @@ packages:
     dependencies:
       any-promise: 1.3.0
     dev: true
-
-  /three@0.162.0:
-    resolution: {integrity: sha512-xfCYj4RnlozReCmUd+XQzj6/5OjDNHBy5nT6rVwrOKGENAvpXe2z1jL+DZYaMu4/9pNsjH/4Os/VvS9IrH7IOQ==}
-    dev: false
 
   /throttle-debounce@3.0.1:
     resolution: {integrity: sha512-dTEWWNu6JmeVXY0ZYoPuH5cRIwc0MeGbJwah9KUNYSJwommQpCzTySTpEe8Gs1J23aeWEuAobe4Ag7EHVt/LOg==}
