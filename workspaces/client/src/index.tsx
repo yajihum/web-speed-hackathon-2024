@@ -8,8 +8,6 @@ import { ClientApp } from '@wsh-2024/app/src/index';
 import { registerServiceWorker } from './utils/registerServiceWorker';
 
 const main = async () => {
-  await registerServiceWorker();
-
   const renderApp = () => {
     const rootElement = document.getElementById('root');
     if (!rootElement) {
@@ -23,7 +21,7 @@ const main = async () => {
         rootElement,
         <SWRConfig
           value={{
-            revalidateIfStale: true,
+            revalidateIfStale: false,
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
           }}
@@ -41,6 +39,8 @@ const main = async () => {
   } else {
     renderApp();
   }
+
+  await registerServiceWorker();
 };
 
 main();

@@ -8,7 +8,9 @@ import type { Options } from 'tsup';
 import { defineConfig } from 'tsup';
 
 export default defineConfig(async (): Promise<Options[]> => {
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const PACKAGE_DIR = (await findPackageDir(process.cwd()))!;
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const WORKSPACE_DIR = (await findWorkspaceDir(process.cwd()))!;
 
   const OUTPUT_DIR = path.resolve(PACKAGE_DIR, './dist');

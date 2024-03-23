@@ -34,7 +34,6 @@ async function onFetch(request: Request): Promise<Response> {
 
   if (res.headers.get('Content-Type') === 'image/jxl') {
     return transformJpegXLToBmp(res);
-  } else {
-    return res;
   }
+  return res;
 }

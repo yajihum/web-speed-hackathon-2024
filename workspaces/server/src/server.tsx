@@ -6,12 +6,7 @@ import { app } from './routes';
 async function main() {
   await seeding();
 
-  serve({ fetch: app.fetch, port: Number(process.env['PORT']) || 8000 }, (info) => {
-    console.log(`listening on ${info.address}:${info.port}`);
-  });
+  serve({ fetch: app.fetch, port: Number(process.env['PORT']) || 8000 });
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exitCode = 1;
-});
+main();
