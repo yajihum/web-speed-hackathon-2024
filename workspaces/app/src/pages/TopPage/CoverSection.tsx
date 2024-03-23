@@ -18,7 +18,7 @@ const _ImageWrapper = styled.div`
 const _Image = styled.img`
   display: inline-block;
   width: 100%;
-  height: 576px;
+  max-height: 576px;
 `;
 
 const _Wrapper = styled.div`
