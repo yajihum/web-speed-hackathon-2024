@@ -19,12 +19,15 @@ export const SearchResult: React.FC<Props> = ({ books, keyword }) => {
       return books;
     }
     return books.filter((book) => {
-      return isContains({ query: keyword, target: book.name }) || isContains({ query: keyword, target: book.nameRuby });
+      return (
+        isContains({ query: keyword, target: book.name }) ||
+        isContains({ query: keyword, target: book.nameRuby })
+      );
     });
   }, [books, keyword]);
 
   return (
-    <Flex align="center" as="ul" direction="column" justify="center">
+    <Flex align='center' as='ul' direction='column' justify='center'>
       <Suspense
         fallback={
           <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
@@ -33,7 +36,9 @@ export const SearchResult: React.FC<Props> = ({ books, keyword }) => {
         }
       >
         {relatedBooks.map((book) => (
-          <BookListItem key={book.id} bookId={book.id} />
+          <Suspense key={book.id} fallback={null}>
+            <BookListItem bookId={book.id} />
+          </Suspense>
         ))}
         {relatedBooks.length === 0 && (
           <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
