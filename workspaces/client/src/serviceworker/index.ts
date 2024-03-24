@@ -1,5 +1,4 @@
 /// <reference types="@types/serviceworker" />
-import { zstdFetch as fetch } from './zstdFetch';
 
 self.addEventListener('install', (ev: ExtendableEvent) => {
   ev.waitUntil(self.skipWaiting());
@@ -14,5 +13,10 @@ self.addEventListener('fetch', (ev: FetchEvent) => {
 });
 
 async function onFetch(request: Request): Promise<Response> {
-  return await fetch(request);
+  return await fetch(request, {
+    headers: new Headers([
+      ...request.headers.entries(),
+      ['X-Accept-Encoding', 'gzip, deflate, br'],
+    ]),
+  });
 }

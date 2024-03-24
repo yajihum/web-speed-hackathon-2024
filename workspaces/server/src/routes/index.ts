@@ -1,10 +1,10 @@
 import { Hono } from 'hono';
+import { compress } from 'hono/compress';
 import { cors } from 'hono/cors';
 import { HTTPException } from 'hono/http-exception';
 import { secureHeaders } from 'hono/secure-headers';
 
 import { cacheControlMiddleware } from '../middlewares/cacheControlMiddleware';
-import { compressMiddleware } from '../middlewares/compressMiddleware';
 
 import { adminApp } from './admin';
 import { apiApp } from './api';
@@ -29,7 +29,7 @@ app.use(
     origin: (origin) => origin,
   }),
 );
-app.use(compressMiddleware);
+app.use(compress());
 app.use(cacheControlMiddleware);
 
 app.get('/healthz', (c) => {
