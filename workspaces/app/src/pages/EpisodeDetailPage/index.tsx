@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import type { RouteParams } from 'regexparam';
+import styled from 'styled-components';
 
 import type { GetBookResponse } from '@wsh-2024/schema/src/api/books/GetBookResponse';
 
@@ -66,9 +67,14 @@ const EpisodeDetailPageContent: React.FC = () => {
   );
 };
 
+const EpisodeDetailFallback = styled.div`
+  width: 100%;
+  height: 1000px;
+`;
+
 const EpisodeDetailPage: React.FC = () => {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<EpisodeDetailFallback />}>
       <EpisodeDetailPageContent />
     </Suspense>
   );
