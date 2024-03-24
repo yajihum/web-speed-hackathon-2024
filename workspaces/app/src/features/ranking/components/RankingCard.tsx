@@ -51,7 +51,7 @@ const RankingCard: React.FC<Props> = ({ ranking }) => {
 
   return (
     <_Wrapper>
-      <_Link href={`/books/${book.id}`}>
+      <_Link to={`/books/${book.id}`}>
         <Spacer height={Space * 1.5} />
         <Flex align='flex-start' gap={Space * 2.5} justify='flex-start'>
           <_ImgWrapper>

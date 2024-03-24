@@ -84,6 +84,22 @@ class BookRepository implements BookRepositoryInterface {
               name: true,
               nameRuby: true,
             },
+            with: {
+              pages: {
+                columns: {
+                  id: true,
+                  page: true,
+                },
+                with: {
+                  image: {
+                    columns: {
+                      alt: true,
+                      id: true,
+                    },
+                  },
+                },
+              },
+            },
           },
           image: {
             columns: {

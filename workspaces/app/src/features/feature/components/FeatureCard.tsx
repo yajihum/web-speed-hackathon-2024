@@ -55,7 +55,7 @@ export const FeatureCard: React.FC<Props> = ({ feature }) => {
   const { book } = feature;
 
   return (
-    <_FeatureCardWrapper href={`/books/${feature.book.id}`}>
+    <_FeatureCardWrapper to={`/books/${feature.book.id}`}>
       <_ImgWrapper>
         <Image
           alt={book.image.alt}

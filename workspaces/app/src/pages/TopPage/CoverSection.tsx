@@ -54,7 +54,7 @@ export const CoverSection: React.FC = () => {
           '/assets/hero-image-1024.webp 1024w',
         ].join(',')}
       />
-      <_SearchLink href='/search'>
+      <_SearchLink to='/search'>
         <Search />
         <Text color={Color.MONO_A} typography={Typography.NORMAL16}>
           検索

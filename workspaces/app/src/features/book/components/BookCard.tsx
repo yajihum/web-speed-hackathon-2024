@@ -42,7 +42,7 @@ type Props = {
 
 export const BookCard: React.FC<Props> = ({ book }) => {
   return (
-    <_Wrapper href={`/books/${book.id}`}>
+    <_Wrapper to={`/books/${book.id}`}>
       <_ImgWrapper>
         <Image
           alt={book.image.alt}
