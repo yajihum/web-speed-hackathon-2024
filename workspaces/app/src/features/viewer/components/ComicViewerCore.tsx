@@ -1,9 +1,8 @@
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useInterval, useUpdate } from 'react-use';
 import styled from 'styled-components';
 
-import { addUnitIfNeeded } from '../../../lib/css/addUnitIfNeeded';
-import { useEpisode } from '../../episode/hooks/useEpisode';
+import type { EpisodeType } from '../../../pages/EpisodeDetailPage';
 
 import { ComicViewerPage } from './ComicViewerPage';
 
@@ -77,14 +76,14 @@ const _Wrapper = styled.div<{
   cursor: grab;
   direction: rtl;
   display: grid;
-  grid-auto-columns: ${({ $pageWidth }) => addUnitIfNeeded($pageWidth)};
+  grid-auto-columns: ${({ $pageWidth }) => `${$pageWidth}px`};
   grid-auto-flow: column;
   grid-template-rows: minmax(auto, 100%);
   height: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
   overscroll-behavior: none;
-  padding-inline: ${({ $paddingInline }) => addUnitIfNeeded($paddingInline)};
+  padding-inline: ${({ $paddingInline }) => `${$paddingInline}px`};
   touch-action: none;
 
   &::-webkit-scrollbar {
@@ -93,15 +92,13 @@ const _Wrapper = styled.div<{
 `;
 
 type Props = {
-  episodeId: string;
+  episode: EpisodeType;
 };
 
-const ComicViewerCore: React.FC<Props> = ({ episodeId }) => {
+export const ComicViewerCore: React.FC<Props> = ({ episode }) => {
   // 画面のリサイズに合わせて再描画する
   const rerender = useUpdate();
   useInterval(rerender, 0);
-
-  const { data: episode } = useEpisode({ params: { episodeId } });
 
   const [container, containerRef] = useState<HTMLDivElement | null>(null);
   const [scrollView, scrollViewRef] = useState<HTMLDivElement | null>(null);
@@ -264,13 +261,3 @@ const ComicViewerCore: React.FC<Props> = ({ episodeId }) => {
     </_Container>
   );
 };
-
-const ComicViewerCoreWithSuspense: React.FC<Props> = ({ episodeId }) => {
-  return (
-    <Suspense fallback={null}>
-      <ComicViewerCore episodeId={episodeId} />
-    </Suspense>
-  );
-};
-
-export { ComicViewerCoreWithSuspense as ComicViewerCore };

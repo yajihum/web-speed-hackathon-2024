@@ -29,7 +29,7 @@ const _AuthorImageWrapper = styled.div`
   }
 `;
 
-const AuthorDetailPage: React.FC = () => {
+const AuthorDetailPageContent: React.FC = () => {
   const { authorId } = useParams<RouteParams<'/authors/:authorId'>>();
 
   const { data: author } = useAuthor({ params: { authorId: authorId || '' } });
@@ -115,12 +115,12 @@ const AuthorDetailFallback = styled.div`
   height: 1000px;
 `;
 
-const AuthorDetailPageWithSuspense: React.FC = () => {
+const AuthorDetailPage: React.FC = () => {
   return (
     <Suspense fallback={<AuthorDetailFallback />}>
-      <AuthorDetailPage />
+      <AuthorDetailPageContent />
     </Suspense>
   );
 };
 
-export { AuthorDetailPageWithSuspense as AuthorDetailPage };
+export default AuthorDetailPage;

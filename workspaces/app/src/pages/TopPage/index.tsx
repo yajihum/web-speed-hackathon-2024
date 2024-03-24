@@ -5,7 +5,7 @@ import { Space } from '../../foundation/styles/variables';
 import { TopContents } from './Contents';
 import { CoverSection } from './CoverSection';
 
-export const TopPage: React.FC = () => {
+const TopPage: React.FC = () => {
   return (
     <Flex
       align='flex-start'
@@ -21,3 +21,5 @@ export const TopPage: React.FC = () => {
     </Flex>
   );
 };
+
+export default TopPage;

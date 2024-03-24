@@ -46,12 +46,4 @@ const SearchPage: React.FC = () => {
   );
 };
 
-const SearchPageWithSuspense: React.FC = () => {
-  return (
-    <Suspense fallback={null}>
-      <SearchPage />
-    </Suspense>
-  );
-};
-
-export { SearchPageWithSuspense as SearchPage };
+export default SearchPage;

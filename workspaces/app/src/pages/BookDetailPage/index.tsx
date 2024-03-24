@@ -96,7 +96,7 @@ const EpisodeList = ({ bookId, episodes }: EpiSodeProps) => {
   );
 };
 
-const BookDetailPage: React.FC = () => {
+const BookDetailPageContent: React.FC = () => {
   const { bookId } = useParams<RouteParams<'/books/:bookId'>>();
 
   const { data: book } = useBook({ params: { bookId: bookId || '' } });
@@ -161,12 +161,12 @@ const BookDetailPage: React.FC = () => {
   );
 };
 
-const BookDetailPageWithSuspense: React.FC = () => {
+const BookDetailPage: React.FC = () => {
   return (
     <Suspense fallback={<BookDetailFallback />}>
-      <BookDetailPage />
+      <BookDetailPageContent />
     </Suspense>
   );
 };
 
-export { BookDetailPageWithSuspense as BookDetailPage };
+export default BookDetailPage;
