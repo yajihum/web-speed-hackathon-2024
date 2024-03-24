@@ -35,7 +35,9 @@ export const Footer: React.FC = () => {
   const updateDialogContent = useSetAtom(DialogContentAtom);
 
   const handleRequestToTermDialogOpen = async () => {
-    const { TERM } = await import('../constants/Term');
+    const response = await fetch('/assets/constants/Term.txt');
+    const TERM = await response.text();
+
     updateDialogContent(
       <_Content aria-labelledby={termDialogA11yId} role='dialog'>
         <Text
@@ -55,7 +57,9 @@ export const Footer: React.FC = () => {
   };
 
   const handleRequestToContactDialogOpen = async () => {
-    const { CONTACT } = await import('../constants/Contact');
+    const response = await fetch('/assets/constants/Contact.txt');
+    const CONTACT = await response.text();
+
     updateDialogContent(
       <_Content aria-labelledby={contactDialogA11yId} role='dialog'>
         <Text
@@ -75,7 +79,9 @@ export const Footer: React.FC = () => {
   };
 
   const handleRequestToQuestionDialogOpen = async () => {
-    const { QUESTION } = await import('../constants/Question');
+    const response = await fetch('/assets/constants/Question.txt');
+    const QUESTION = await response.text();
+
     updateDialogContent(
       <_Content aria-labelledby={questionDialogA11yId} role='dialog'>
         <Text
@@ -95,7 +101,9 @@ export const Footer: React.FC = () => {
   };
 
   const handleRequestToCompanyDialogOpen = async () => {
-    const { COMPANY } = await import('../constants/Company');
+    const response = await fetch('/assets/constants/Company.txt');
+    const COMPANY = await response.text();
+
     updateDialogContent(
       <_Content aria-labelledby={companyDialogA11yId} role='dialog'>
         <Text
@@ -115,7 +123,9 @@ export const Footer: React.FC = () => {
   };
 
   const handleRequestToOverviewDialogOpen = async () => {
-    const { OVERVIEW } = await import('../constants/Overview');
+    const response = await fetch('/assets/constants/Overview.txt');
+    const OVERVIEW = await response.text();
+
     updateDialogContent(
       <_Content aria-labelledby={overviewDialogA11yId} role='dialog'>
         <Text
