@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useInterval, useUpdate } from 'react-use';
 import styled from 'styled-components';
 
 import type { EpisodeType } from '../../../pages/EpisodeDetailPage';
@@ -96,17 +95,35 @@ type Props = {
 };
 
 export const ComicViewerCore: React.FC<Props> = ({ episode }) => {
-  // 画面のリサイズに合わせて再描画する
-  const rerender = useUpdate();
-  useInterval(rerender, 0);
-
   const [container, containerRef] = useState<HTMLDivElement | null>(null);
   const [scrollView, scrollViewRef] = useState<HTMLDivElement | null>(null);
 
+  // コンテナの幅と高さをstateとして保持
+  const [containerSize, setContainerSize] = useState({ height: 0, width: 0 });
+
+  useEffect(() => {
+    if (container) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          setContainerSize({
+            height: entry.contentRect.height,
+            width: entry.contentRect.width,
+          });
+        }
+      });
+
+      resizeObserver.observe(container);
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [container]);
+
   // コンテナの幅
-  const cqw = (container?.getBoundingClientRect().width ?? 0) / 100;
+  const cqw = (containerSize.width ?? 0) / 100;
   // コンテナの高さ
-  const cqh = (container?.getBoundingClientRect().height ?? 0) / 100;
+  const cqh = (containerSize.height ?? 0) / 100;
 
   // 1画面に表示できるページ数（1 or 2）
   const pageCountParView =

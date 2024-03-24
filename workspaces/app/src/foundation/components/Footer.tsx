@@ -142,7 +142,13 @@ export const Footer: React.FC = () => {
         gap={Space * 1}
         justify='flex-start'
       >
-        <img alt='Cyber TOON' loading='lazy' src='/assets/cyber-toon.svg' />
+        <img
+          alt='Cyber TOON'
+          height={45}
+          loading='lazy'
+          src='/assets/cyber-toon.svg'
+          width={189}
+        />
         <Flex align='start' direction='row' gap={Space * 1.5} justify='center'>
           <_Button disabled={!isClient} onClick={handleRequestToTermDialogOpen}>
             利用規約

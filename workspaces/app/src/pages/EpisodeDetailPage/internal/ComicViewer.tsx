@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useInterval, useUpdate } from 'react-use';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import type { EpisodeType } from '..';
@@ -35,26 +34,39 @@ type Props = {
 };
 
 export const ComicViewer: React.FC<Props> = ({ episode }) => {
-  // 画面のリサイズに合わせて再描画する
-  const rerender = useUpdate();
-  useInterval(rerender, 0);
+  const ref = useRef<HTMLDivElement>(null);
+  const [viewerHeight, setViewerHeight] = useState<number>(MIN_VIEWER_HEIGHT);
 
-  const [el, ref] = useState<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    const $el = ref.current;
 
-  // コンテナの幅
-  const cqw = (el?.getBoundingClientRect().width ?? 0) / 100;
+    const handleResize = () => {
+      // コンテナの幅
+      const cqw = ($el.getBoundingClientRect().width ?? 0) / 100;
 
-  // 1画面に表示できるページ数（1 or 2）
-  const pageCountParView = 100 * cqw <= 2 * MIN_PAGE_WIDTH ? 1 : 2;
-  // 1ページの幅の候補
-  const candidatePageWidth = (100 * cqw) / pageCountParView;
-  // 1ページの高さの候補
-  const candidatePageHeight = (candidatePageWidth / IMAGE_WIDTH) * IMAGE_HEIGHT;
-  // ビュアーの高さ
-  const viewerHeight = Math.min(
-    Math.max(candidatePageHeight, MIN_VIEWER_HEIGHT),
-    MAX_VIEWER_HEIGHT,
-  );
+      // 1画面に表示できるページ数（1 or 2）
+      const pageCountParView = 100 * cqw <= 2 * MIN_PAGE_WIDTH ? 1 : 2;
+      // 1ページの幅の候補
+      const candidatePageWidth = (100 * cqw) / pageCountParView;
+      // 1ページの高さの候補
+      const candidatePageHeight =
+        (candidatePageWidth / IMAGE_WIDTH) * IMAGE_HEIGHT;
+      // ビュアーの高さ
+      const viewerHeight = Math.min(
+        Math.max(candidatePageHeight, MIN_VIEWER_HEIGHT),
+        MAX_VIEWER_HEIGHT,
+      );
+      setViewerHeight(viewerHeight);
+    };
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <_Container ref={ref}>

@@ -1,6 +1,7 @@
 import { Suspense, useCallback, useId, useState } from 'react';
 
 import { Box } from '../../foundation/components/Box';
+import Loading from '../../foundation/components/Loading';
 import { Text } from '../../foundation/components/Text';
 import { Color, Space, Typography } from '../../foundation/styles/variables';
 
@@ -37,7 +38,7 @@ const SearchPage: React.FC = () => {
           検索結果
         </Text>
         {keyword !== '' && (
-          <Suspense fallback={null}>
+          <Suspense fallback={<Loading />}>
             <SearchResult keyword={keyword} />
           </Suspense>
         )}
