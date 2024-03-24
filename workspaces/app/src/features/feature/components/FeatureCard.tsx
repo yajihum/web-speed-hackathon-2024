@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
 import type { GetFeaturetResponse } from '@wsh-2024/schema/src/api/features/GetFeatureListResponse';
@@ -14,7 +13,7 @@ import {
   Typography,
 } from '../../../foundation/styles/variables';
 
-const _Wrapper = styled(Link)`
+export const _FeatureCardWrapper = styled(Link)`
   display: grid;
   gap: ${Space * 1}px;
   background-color: ${Color.MONO_A};
@@ -52,11 +51,11 @@ type Props = {
   feature: GetFeaturetResponse;
 };
 
-const FeatureCard: React.FC<Props> = ({ feature }) => {
+export const FeatureCard: React.FC<Props> = ({ feature }) => {
   const { book } = feature;
 
   return (
-    <_Wrapper href={`/books/${feature.book.id}`}>
+    <_FeatureCardWrapper href={`/books/${feature.book.id}`}>
       <_ImgWrapper>
         <Image
           alt={book.image.alt}
@@ -94,16 +93,6 @@ const FeatureCard: React.FC<Props> = ({ feature }) => {
           </Text>
         </Flex>
       </_ContentWrapper>
-    </_Wrapper>
+    </_FeatureCardWrapper>
   );
 };
-
-const FeatureCardWithSuspense: React.FC<Props> = (props) => {
-  return (
-    <Suspense fallback={null}>
-      <FeatureCard {...props} />
-    </Suspense>
-  );
-};
-
-export { FeatureCardWithSuspense as FeatureCard };

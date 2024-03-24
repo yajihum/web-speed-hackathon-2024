@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
 import type { GetReleaseBookResponse } from '@wsh-2024/schema/src/api/releases/GetReleaseResponse';
@@ -41,7 +40,7 @@ type Props = {
   book: GetReleaseBookResponse;
 };
 
-const BookCard: React.FC<Props> = ({ book }) => {
+export const BookCard: React.FC<Props> = ({ book }) => {
   return (
     <_Wrapper href={`/books/${book.id}`}>
       <_ImgWrapper>
@@ -88,13 +87,3 @@ const BookCard: React.FC<Props> = ({ book }) => {
     </_Wrapper>
   );
 };
-
-const BookCardWithSuspense: React.FC<Props> = (props) => {
-  return (
-    <Suspense fallback={null}>
-      <BookCard {...props} />
-    </Suspense>
-  );
-};
-
-export { BookCardWithSuspense as BookCard };

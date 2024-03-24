@@ -93,7 +93,7 @@ const AuthorDetailPage: React.FC = () => {
         <Flex align='center' as='ul' direction='column' justify='center'>
           {author.books.map((book) => (
             <Suspense key={book.id} fallback={null}>
-              <BookListItem bookId={book.id} />
+              <BookListItem book={book} />
             </Suspense>
           ))}
           {author.books.length === 0 && (
@@ -110,9 +110,14 @@ const AuthorDetailPage: React.FC = () => {
   );
 };
 
+const AuthorDetailFallback = styled.div`
+  width: 100%;
+  height: 1000px;
+`;
+
 const AuthorDetailPageWithSuspense: React.FC = () => {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<AuthorDetailFallback />}>
       <AuthorDetailPage />
     </Suspense>
   );

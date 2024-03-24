@@ -20,6 +20,11 @@ import { Color, Space, Typography } from '../../foundation/styles/variables';
 
 import { BottomNavigator } from './internal/BottomNavigator';
 
+const BookDetailFallback = styled.div`
+  width: 100%;
+  height: 1000px;
+`;
+
 const _HeadingWrapper = styled.section`
   display: grid;
   align-items: start;
@@ -158,7 +163,7 @@ const BookDetailPage: React.FC = () => {
 
 const BookDetailPageWithSuspense: React.FC = () => {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<BookDetailFallback />}>
       <BookDetailPage />
     </Suspense>
   );

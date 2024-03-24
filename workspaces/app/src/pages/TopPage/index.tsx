@@ -1,5 +1,3 @@
-import { Suspense } from 'react';
-
 import { Box } from '../../foundation/components/Box';
 import { Flex } from '../../foundation/components/Flex';
 import { Space } from '../../foundation/styles/variables';
@@ -7,7 +5,7 @@ import { Space } from '../../foundation/styles/variables';
 import { TopContents } from './Contents';
 import { CoverSection } from './CoverSection';
 
-const TopPage: React.FC = () => {
+export const TopPage: React.FC = () => {
   return (
     <Flex
       align='flex-start'
@@ -23,13 +21,3 @@ const TopPage: React.FC = () => {
     </Flex>
   );
 };
-
-const TopPageWithSuspense: React.FC = () => {
-  return (
-    <Suspense fallback={null}>
-      <TopPage />
-    </Suspense>
-  );
-};
-
-export { TopPageWithSuspense as TopPage };
