@@ -1,5 +1,4 @@
 /// <reference types="@types/serviceworker" />
-import { transformJpegXLToBmp } from './transformJpegXLToBmp';
 import { zstdFetch as fetch } from './zstdFetch';
 
 self.addEventListener('install', (ev: ExtendableEvent) => {
@@ -15,10 +14,5 @@ self.addEventListener('fetch', (ev: FetchEvent) => {
 });
 
 async function onFetch(request: Request): Promise<Response> {
-  const res = await fetch(request);
-
-  if (res.headers.get('Content-Type') === 'image/jxl') {
-    return transformJpegXLToBmp(res);
-  }
-  return res;
+  return await fetch(request);
 }
