@@ -1,16 +1,10 @@
 import type * as CSS from 'csstype';
 import styled from 'styled-components';
 
-import { addUnitIfNeeded } from '../../lib/css/addUnitIfNeeded';
-
 const _Image = styled.img<{
-  $height: number | string;
-  $objectFit: string;
-  $width: number | string;
+  $objectFit: CSS.Property.ObjectFit;
 }>`
   object-fit: ${({ $objectFit }) => $objectFit};
-  width: ${({ $width }) => addUnitIfNeeded($width)};
-  height: ${({ $height }) => addUnitIfNeeded($height)};
   display: block;
 `;
 
@@ -30,10 +24,11 @@ export const Image: React.FC<Props> = ({
   return (
     <_Image
       {...rest}
-      $height={height}
       $objectFit={objectFit}
-      $width={width}
+      decoding='async'
+      height={height}
       loading={loading}
+      width={width}
     />
   );
 };
